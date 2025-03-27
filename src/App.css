@@ -1,0 +1,105 @@
+/* Container */
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  /* Heading */
+  .heading {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Input Section */
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .input,
+  .textarea {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .textarea {
+    min-height: 80px;
+  }
+  
+  .add-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Notes List */
+  .notes-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Individual Note Card */
+  .note-card {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  .note-title {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .note-content {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* Delete Button */
+  .delete-button {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .edit-button, .update-button, .cancel-button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .update-button {
+    background-color: #28a745;
+  }
+  
+  .cancel-button {
+    background-color: #dc3545;
+  }
+  
+  
