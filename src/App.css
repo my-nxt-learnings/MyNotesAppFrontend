@@ -103,5 +103,11 @@
   .cancel-button {
     background-color: #dc3545;
   }
+
+  .save-cancel{
+    display: flex;
+    width: 50%;
+    align-items: space-between;
+  }
   
   

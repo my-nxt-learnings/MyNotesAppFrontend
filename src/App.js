@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./App.css"; // Import CSS for styling
+import "./App.css"; 
 
-const API_URL = "https://mynotesappbackend.onrender.com" || "http://localhost:5000"; // Dynamic Backend URL
+const API_URL = "https://mynotesappbackend.onrender.com"; 
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -152,12 +152,14 @@ function App() {
                   onChange={(e) => setEditContent(e.target.value)}
                   className="textarea"
                 />
+                <div className="save-cancel">
                 <button onClick={handleUpdateNote} className="update-button">
                   ✅ Save
                 </button>
                 <button onClick={() => setEditingId(null)} className="cancel-button">
                   ❌ Cancel
                 </button>
+                </div>
               </div>
             ) : (
               // View Mode
