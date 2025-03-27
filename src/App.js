@@ -147,7 +147,7 @@ function App() {
         placeholder="🔍 Search notes..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="input"
+        className="input search"
       />
 
 

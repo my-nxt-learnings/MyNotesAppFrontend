@@ -7,6 +7,7 @@
     text-align: center;
     border: 1px solid black;
     border-radius: 10px;
+    min-height: 90vh;
   }
   
   /* Heading */
@@ -36,6 +37,10 @@
   .textarea {
     min-height: 80px;
     margin-left: 10px;
+  }
+
+  .search{
+    margin-left: auto;
   }
   
   .add-button {
