@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.css"; // Import CSS for styling
 
+const API_URL = "https://mynotesappbackend.onrender.com" || "http://localhost:5000"; // Dynamic Backend URL
+
 function App() {
   const [notes, setNotes] = useState([]);
   const [newTitle, setNewTitle] = useState("");
@@ -14,10 +16,10 @@ function App() {
     fetchNotes();
   }, []);
 
-  // Function to fetch notes from the backend
-  const fetchNotes = async () => {
+  // Function to fetch notes from the backend with retry logic
+  const fetchNotes = async (retryCount = 3) => {
     try {
-      const response = await fetch("http://localhost:5000/api/notes");
+      const response = await fetch(`${API_URL}/api/notes`);
       if (!response.ok) {
         throw new Error("Failed to fetch notes");
       }
@@ -25,33 +27,31 @@ function App() {
       setNotes(data);
     } catch (error) {
       console.error("Error fetching notes:", error);
+      if (retryCount > 0) {
+        setTimeout(() => fetchNotes(retryCount - 1), 2000); // Retry after 2s
+      }
     }
   };
 
   // Function to add a new note
   const handleAddNote = async () => {
-    if (!newTitle || !newContent) {
+    if (!newTitle.trim() || !newContent.trim()) {
       alert("Title and content cannot be empty!");
       return;
     }
 
-    const newNote = { title: newTitle, content: newContent };
-
     try {
-      const response = await fetch("http://localhost:5000/api/notes", {
+      const response = await fetch(`${API_URL}/api/notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newNote),
+        body: JSON.stringify({ title: newTitle, content: newContent }),
       });
 
       if (!response.ok) {
         throw new Error("Failed to add note");
       }
 
-      // Fetch updated notes after adding
-      await fetchNotes();
-
-      // Clear input fields
+      await fetchNotes(); // Refresh notes
       setNewTitle("");
       setNewContent("");
     } catch (error) {
@@ -62,7 +62,7 @@ function App() {
   // Function to delete a note
   const handleDeleteNote = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/notes/${id}`, {
+      const response = await fetch(`${API_URL}/api/notes/${id}`, {
         method: "DELETE",
       });
 
@@ -70,8 +70,7 @@ function App() {
         throw new Error("Failed to delete note");
       }
 
-      // Fetch updated notes after deletion
-      await fetchNotes();
+      setNotes(notes.filter((note) => note.id !== id)); // Update state instantly
     } catch (error) {
       console.error("Error deleting note:", error);
     }
@@ -86,13 +85,13 @@ function App() {
 
   // Function to update the note
   const handleUpdateNote = async () => {
-    if (!editTitle || !editContent) {
+    if (!editTitle.trim() || !editContent.trim()) {
       alert("Title and content cannot be empty!");
       return;
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/notes/${editingId}`, {
+      const response = await fetch(`${API_URL}/api/notes/${editingId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: editTitle, content: editContent }),
@@ -102,11 +101,8 @@ function App() {
         throw new Error("Failed to update note");
       }
 
-      // Fetch updated notes after updating
-      await fetchNotes();
-
-      // Reset edit mode
-      setEditingId(null);
+      await fetchNotes(); // Refresh notes
+      setEditingId(null); // Reset edit mode only if successful
       setEditTitle("");
       setEditContent("");
     } catch (error) {
