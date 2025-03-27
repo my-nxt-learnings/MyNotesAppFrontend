@@ -10,6 +10,8 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
   const [editContent, setEditContent] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
 
   // Fetch notes when the component loads
   useEffect(() => {
@@ -110,6 +112,12 @@ function App() {
     }
   };
 
+  const filteredNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    note.content.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  
+
   return (
     <div className="container">
       <h1 className="heading">📝 Notes App</h1>
@@ -134,9 +142,18 @@ function App() {
         </button>
       </div>
 
+      <input
+        type="text"
+        placeholder="🔍 Search notes..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="input"
+      />
+
+
       {/* Notes list */}
       <ul className="notes-list">
-        {notes.map((note) => (
+        {filteredNotes.map((note) => (
           <li key={note.id} className="note-card">
             {editingId === note.id ? (
               // Editing Mode
