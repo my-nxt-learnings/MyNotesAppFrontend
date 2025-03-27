@@ -37,11 +37,16 @@
   
   .textarea {
     min-height: 80px;
+   
+  }
+
+  .notes-textarea{
     margin-left: 10px;
   }
 
   .search{
     margin-left: auto;
+    width: 40%;
   }
   
   .add-button {

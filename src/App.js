@@ -168,7 +168,7 @@ function App() {
                 <textarea
                   value={editContent}
                   onChange={(e) => setEditContent(e.target.value)}
-                  className="textarea"
+                  className="textarea notes-textarea"
                 />
                 </div>
                 <div className="save-cancel">
