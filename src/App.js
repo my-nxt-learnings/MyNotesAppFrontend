@@ -140,7 +140,8 @@ function App() {
           <li key={note.id} className="note-card">
             {editingId === note.id ? (
               // Editing Mode
-              <div className="input-textaraea">
+              <div>
+                <div className="input-textaraea">
                 <input
                   type="text"
                   value={editTitle}
@@ -152,6 +153,7 @@ function App() {
                   onChange={(e) => setEditContent(e.target.value)}
                   className="textarea"
                 />
+                </div>
                 <div className="save-cancel">
                 <button onClick={handleUpdateNote} className="update-button">
                   ✅ Save
