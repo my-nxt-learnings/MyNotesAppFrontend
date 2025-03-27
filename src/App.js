@@ -140,7 +140,7 @@ function App() {
           <li key={note.id} className="note-card">
             {editingId === note.id ? (
               // Editing Mode
-              <div>
+              <div className="input-textaraea">
                 <input
                   type="text"
                   value={editTitle}

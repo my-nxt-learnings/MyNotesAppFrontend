@@ -109,5 +109,10 @@
     width: 50%;
     align-items: space-between;
   }
+
+  .input-textaraea{
+    display: flex;
+    align-items: center;
+  }
   
   
